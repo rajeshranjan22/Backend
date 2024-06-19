@@ -1,5 +1,7 @@
 const express = require("express")
 const { connection, UserModel } = require("./db")
+require("dotenv").config()
+
 
 const app = express()
 app.use(express.json())
@@ -53,7 +55,7 @@ app.delete("/delete/:id", async (req, res) => {
     }
 })
 
-app.listen(3000, async () => {
+app.listen(process.env.port, async () => {
     try {
         await connection
         console.log("connected to db")
@@ -61,5 +63,5 @@ app.listen(3000, async () => {
     catch (err) {
         console.log(err)
     }
-    console.log("Server is running on port 3000")
+    console.log(`Server is running on port ${process.env.port}`)
 })
